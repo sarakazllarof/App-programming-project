@@ -8,11 +8,11 @@
   --ion-color-primary-tint: #3b82f6;
 
   /** background colors **/
-  --ion-background-color: #f0f9ff;
-  --ion-background-color-rgb: 240, 249, 255;
+  --ion-background-color: #e0f2fe;
+  --ion-background-color-rgb: 224, 242, 254;
   
   /** surface colors **/
-  --ion-color-step-50: #eff6ff;
+  --ion-color-step-50: #f0f9ff;
   --ion-color-step-100: #dbeafe;
   --ion-color-step-150: #bfdbfe;
   
@@ -27,10 +27,10 @@
 
 // Global background for pages
 ion-content {
-  --background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  --background: #e0f2fe;
 }
 
 .page-background {
-  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  background: #e0f2fe;
   min-height: 100vh;
 }
