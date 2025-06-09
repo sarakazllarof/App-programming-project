@@ -1,0 +1,854 @@
+// Dark Green Theme Variables
+:root {
+  --primary-green: #155724;
+  --secondary-green: #198754;
+  --dark-green: #0a3622;
+  --light-green: #6f9c76;
+  --accent-green: #146c43;
+  --forest-green: #004225;
+  --mint-green: #7fb069;
+  --bright-green: #198754;
+  --very-light-green: #d1e7dd;
+  --pastel-green: #a3cfbb;
+  --darker-green: #052e16;
+}
+
+// Page Background - Darker
+ion-content {
+  --background: linear-gradient(135deg, var(--pastel-green) 0%, var(--light-green) 100%);
+}
+
+// Header Styling - Much Darker
+ion-header {
+  ion-toolbar {
+    --background: linear-gradient(135deg, var(--forest-green) 0%, var(--darker-green) 100%);
+    --color: rgb(85, 150, 130);
+    box-shadow: 0 4px 15px rgba(15, 54, 34, 0.6);
+    border-bottom: 3px solid var(--darker-green);
+    
+    ion-title {
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+      color: rgb(64, 150, 105) !important;
+    }
+    
+    ion-button {
+      --color: rgb(86, 186, 138);
+      
+      &:hover {
+        --background: rgba(255, 255, 255, 0.15);
+      }
+    }
+  }
+}
+
+// Search Container - Darker
+.search-container {
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--dark-green) 0%, var(--forest-green) 100%);
+  border-bottom: 3px solid var(--darker-green);
+  box-shadow: 0 4px 12px rgba(10, 54, 34, 0.4);
+}
+
+// Statistics Container - Darker
+.stats-container {
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+  
+  .stats-card {
+    margin: 0;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(10, 54, 34, 0.3);
+    border: 3px solid var(--primary-green);
+    background: linear-gradient(135deg, var(--very-light-green) 0%, var(--pastel-green) 100%);
+    
+    ion-card-content {
+      padding: 1rem;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      
+      .stat-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 1rem;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--forest-green) 0%, var(--primary-green) 100%);
+        border: 2px solid var(--dark-green);
+        color: rgb(124, 189, 145);
+        
+        .stat-icon {
+          font-size: 2rem;
+          color: rgb(40, 88, 36);
+          background: rgba(255, 255, 255, 0.2);
+          padding: 12px;
+          border-radius: 50%;
+          border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .stat-info {
+          h3 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: rgb(33, 86, 50);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+          }
+          
+          p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: rgba(140, 222, 169, 0.9);
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Courses Grid - Darker Theme
+.courses-grid {
+  padding: 0 1rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  
+  .course-card {
+    margin: 0;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(10, 54, 34, 0.25);
+    border: 3px solid var(--primary-green);
+    background: linear-gradient(135deg, rgba(131, 230, 193, 0.729) 0%, var(--very-light-green) 100%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, var(--forest-green), var(--primary-green));
+    }
+    
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(10, 54, 34, 0.35);
+      border-color: var(--forest-green);
+      
+      &::before {
+        background: linear-gradient(90deg, var(--darker-green), var(--forest-green));
+      }
+    }
+    
+    ion-card-header {
+      padding: 1rem 1rem 0.5rem;
+      background: linear-gradient(135deg, var(--very-light-green) 0%, var(--pastel-green) 100%);
+      border-bottom: 1px solid var(--light-green);
+      
+      .course-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        
+        ion-card-title {
+          color: var(--darker-green);
+          font-size: 1.4rem;
+          font-weight: 700;
+          margin: 0;
+          flex: 1;
+          text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+        }
+        
+        ion-badge {
+          margin-left: 8px;
+          --background: var(--forest-green);
+          --color: rgb(186, 245, 218);
+          border-radius: 12px;
+          padding: 6px 10px;
+          border: 2px solid var(--primary-green);
+          
+          ion-icon {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+    
+    ion-card-content {
+      padding: 1rem;
+      
+      .course-details {
+        margin-bottom: 1.5rem;
+        
+        .teacher-info {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 0.8rem;
+          border-radius: 12px;
+          background: linear-gradient(135deg, var(--forest-green) 0%, var(--primary-green) 100%);
+          color: rgb(148, 254, 212);
+          font-weight: 600;
+          border: 2px solid var(--dark-green);
+          box-shadow: 0 4px 12px rgba(10, 54, 34, 0.2);
+          
+          &.no-teacher {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            color: rgb(146, 245, 210);
+            border-color: #495057;
+          }
+          
+          ion-icon {
+            font-size: 1.2rem;
+          }
+          
+          span {
+            font-size: 0.95rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+          }
+        }
+      }
+      
+      .action-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+        
+        ion-button {
+          --border-radius: 10px;
+          --border-width: 2px;
+          font-size: 0.85rem;
+          height: 36px;
+          font-weight: 600;
+          
+          ion-icon {
+            font-size: 1.1rem;
+          }
+          
+          &:not([color]) {
+            --color: var(--dark-green);
+            --border-color: var(--dark-green);
+            
+            &:hover {
+              --background: rgba(10, 54, 34, 0.1);
+            }
+          }
+          
+          &[color="warning"] {
+            --color: #fd7e14;
+            --border-color: #fd7e14;
+            
+            &:hover {
+              --background: rgba(253, 126, 20, 0.1);
+            }
+          }
+          
+          &[color="success"] {
+            --color: var(--forest-green);
+            --border-color: var(--forest-green);
+            
+            &:hover {
+              --background: rgba(0, 66, 37, 0.1);
+            }
+          }
+          
+          &[color="danger"] {
+            --color: #dc3545;
+            --border-color: #dc3545;
+            
+            &:hover {
+              --background: rgba(220, 53, 69, 0.1);
+            }
+          }
+          
+          &[color="medium"] {
+            --color: #495057;
+            --border-color: #495057;
+            
+            &:hover {
+              --background: rgba(73, 80, 87, 0.1);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Loading Container - Darker
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  color: var(--darker-green);
+  
+  ion-spinner {
+    --color: var(--forest-green);
+    margin-bottom: 1.5rem;
+    transform: scale(1.5);
+  }
+  
+  p {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+  }
+}
+
+// Empty State - Darker
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  color: var(--darker-green);
+  background: linear-gradient(135deg, var(--very-light-green) 0%, var(--pastel-green) 100%);
+  border-radius: 20px;
+  margin: 1rem;
+  border: 3px solid var(--primary-green);
+  box-shadow: 0 8px 25px rgba(10, 54, 34, 0.15);
+  
+  ion-icon {
+    color: var(--forest-green);
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+    filter: drop-shadow(0 4px 8px rgba(10, 54, 34, 0.2));
+  }
+  
+  h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--darker-green);
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+  }
+  
+  p {
+    margin: 0 0 2rem 0;
+    color: var(--dark-green);
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  
+  ion-button {
+    --background: linear-gradient(135deg, var(--forest-green) 0%, var(--primary-green) 100%);
+    --color: rgb(134, 238, 200);
+    --border-radius: 12px;
+    font-weight: 700;
+    height: 50px;
+    padding: 0 2rem;
+    box-shadow: 0 6px 20px rgba(10, 54, 34, 0.3);
+    
+    &:hover {
+      box-shadow: 0 8px 25px rgba(10, 54, 34, 0.4);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// Modal Styles - Darker
+ion-modal {
+  --background: var(--very-light-green);
+  
+  ion-header {
+    ion-toolbar {
+      --background: linear-gradient(135deg, var(--forest-green) 0%, var(--darker-green) 100%);
+      --color: rgb(166, 243, 216);
+      box-shadow: 0 4px 12px rgba(10, 54, 34, 0.4);
+      
+      ion-title {
+        font-weight: 700;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+      
+      ion-button {
+        --color: rgb(152, 245, 188);
+        
+        &:hover {
+          --background: rgba(255, 255, 255, 0.15);
+        }
+      }
+    }
+  }
+  
+  ion-content {
+    --background: var(--very-light-green);
+    padding: 1rem;
+  }
+}
+
+// Course Details Content - Darker
+.course-details-content {
+  ion-card {
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(10, 54, 34, 0.25);
+    border: 3px solid var(--primary-green);
+    background: rgb(186, 247, 214);
+    
+    ion-card-header {
+      background: linear-gradient(135deg, var(--forest-green) 0%, var(--primary-green) 100%);
+      border-bottom: 2px solid var(--dark-green);
+      color: rgb(183, 244, 212);
+      
+      ion-card-title {
+        color: rgb(179, 243, 191);
+        font-weight: 700;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+    }
+    
+    ion-list {
+      background: transparent;
+      
+      ion-item {
+        --background: var(--very-light-green);
+        --border-color: var(--light-green);
+        margin-bottom: 0.5rem;
+        border-radius: 12px;
+        border: 2px solid var(--light-green);
+        
+        ion-icon {
+          color: var(--forest-green);
+          margin-right: 12px;
+          font-size: 1.5rem;
+        }
+        
+        ion-label {
+          h3 {
+            color: var(--darker-green);
+            font-weight: 700;
+            margin-bottom: 6px;
+            font-size: 1.1rem;
+          }
+          
+          p {
+            color: var(--dark-green);
+            font-weight: 600;
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+    
+    .detail-actions {
+      padding: 1.5rem;
+      background: var(--very-light-green);
+      
+      ion-button {
+        --border-radius: 12px;
+        margin-bottom: 0.8rem;
+        font-weight: 600;
+        height: 48px;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+        
+        &:not([color]) {
+          --background: var(--forest-green);
+          --color: rgb(147, 246, 188);
+        }
+      }
+    }
+  }
+}
+
+// Form Styles - Darker
+form {
+  padding: 1.5rem;
+  
+  ion-item {
+    --background: rgb(34, 178, 130);
+    --border-color: var(--primary-green);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    border: 2px solid var(--primary-green);
+    box-shadow: 0 4px 12px rgba(10, 54, 34, 0.1);
+    
+    ion-label {
+      color: var(--darker-green);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    
+    ion-input, ion-select {
+      --color: var(--darker-green);
+      font-weight: 600;
+    }
+    
+    &.ion-invalid {
+      --border-color: #dc3545;
+      border-color: #dc3545;
+      box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+    }
+    
+    &:focus-within {
+      --border-color: var(--forest-green);
+      border-color: var(--forest-green);
+      box-shadow: 0 0 0 3px rgba(0, 66, 37, 0.15);
+    }
+  }
+  
+  .form-buttons {
+    padding: 1.5rem 0;
+    
+    ion-button {
+      --border-radius: 12px;
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+      height: 50px;
+      
+      &[type="submit"] {
+        --background: linear-gradient(135deg, var(--forest-green) 0%, var(--primary-green) 100%);
+        --color: rgb(142, 250, 205);
+        box-shadow: 0 6px 20px rgba(10, 54, 34, 0.3);
+        
+        &:hover {
+          box-shadow: 0 8px 25px rgba(10, 54, 34, 0.4);
+        }
+      }
+      
+      &[fill="outline"] {
+        --color: var(--darker-green);
+        --border-color: var(--darker-green);
+        --border-width: 2px;
+        
+        &:hover {
+          --background: rgba(5, 46, 22, 0.1);
+        }
+      }
+    }
+  }
+}
+
+// Teacher Selection - Darker
+.teacher-selection {
+  padding: 1.5rem;
+  
+  ion-item:first-child {
+    --background: linear-gradient(135deg, var(--forest-green) 0%, var(--primary-green) 100%);
+    color: rgb(131, 238, 204);
+    border: 2px solid var(--dark-green);
+    margin-bottom: 1.5rem;
+    
+    ion-label {
+      h2 {
+        color: rgb(176, 251, 203);
+        font-weight: 700;
+        margin-bottom: 8px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+      
+      p {
+        color: rgba(198, 248, 220, 0.9);
+        font-weight: 500;
+      }
+    }
+  }
+  
+  ion-radio-group {
+    ion-item {
+      --background: rgb(167, 239, 195);
+      --border-color: var(--primary-green);
+      border-radius: 12px;
+      margin-bottom: 0.8rem;
+      border: 2px solid var(--primary-green);
+      box-shadow: 0 4px 12px rgba(10, 54, 34, 0.1);
+      transition: all 0.3s ease;
+      
+      &.item-radio-checked {
+        --background: linear-gradient(135deg, var(--very-light-green) 0%, var(--pastel-green) 100%);
+        --border-color: var(--forest-green);
+        border-color: var(--forest-green);
+        box-shadow: 0 6px 20px rgba(10, 54, 34, 0.2);
+        transform: translateY(-2px);
+      }
+      
+      &:hover {
+        box-shadow: 0 6px 18px rgba(10, 54, 34, 0.15);
+      }
+      
+      ion-label {
+        h3 {
+          color: var(--darker-green);
+          font-weight: 700;
+          margin-bottom: 6px;
+          font-size: 1.1rem;
+        }
+        
+        p {
+          color: var(--dark-green);
+          font-size: 0.95rem;
+          font-weight: 500;
+        }
+      }
+      
+      ion-radio {
+        --color: var(--forest-green);
+        --color-checked: var(--forest-green);
+        margin-right: 8px;
+      }
+    }
+  }
+  
+  .teacher-modal-buttons {
+    padding: 1.5rem 0;
+    
+    ion-button {
+      --border-radius: 12px;
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+      height: 50px;
+      
+      &:not([fill="outline"]) {
+        --background: linear-gradient(135deg, var(--forest-green) 0%, var(--primary-green) 100%);
+        --color: rgb(176, 244, 218);
+        box-shadow: 0 6px 20px rgba(10, 54, 34, 0.3);
+        
+        &:hover {
+          box-shadow: 0 8px 25px rgba(10, 54, 34, 0.4);
+        }
+      }
+      
+      &[fill="outline"] {
+        --color: var(--darker-green);
+        --border-color: var(--darker-green);
+        --border-width: 2px;
+        
+        &:hover {
+          --background: rgba(5, 46, 22, 0.1);
+        }
+      }
+    }
+  }
+}
+
+// Responsive Design - Enhanced
+@media (max-width: 768px) {
+  .courses-grid {
+    grid-template-columns: 1fr;
+    padding: 0 0.5rem 2rem;
+  }
+  
+  .stats-container {
+    padding: 0 0.5rem;
+    
+    .stats-grid {
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+      
+      .stat-item {
+        padding: 0.8rem;
+        
+        .stat-icon {
+          font-size: 1.5rem;
+          padding: 8px;
+        }
+        
+        .stat-info {
+          h3 {
+            font-size: 1.4rem;
+          }
+          
+          p {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+  
+  .course-card {
+    ion-card-header {
+      padding: 0.8rem 0.8rem 0.3rem;
+      
+      .course-header {
+        ion-card-title {
+          font-size: 1.2rem;
+        }
+      }
+    }
+    
+    ion-card-content {
+      padding: 0.8rem;
+      
+      .action-buttons {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        
+        ion-button {
+          height: 40px;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+  
+  .search-container {
+    padding: 0.8rem;
+  }
+  
+  .empty-state {
+    padding: 2rem 1rem;
+    margin: 0.5rem;
+    
+    h3 {
+      font-size: 1.5rem;
+    }
+    
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .courses-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  
+  .stats-container .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// Infinite Scroll - Darker
+ion-infinite-scroll-content {
+  --color: var(--forest-green);
+  
+  .infinite-loading {
+    color: var(--darker-green);
+    font-weight: 600;
+  }
+}
+
+// Toast Styling (Global) - Enhanced
+.toast-success {
+  --background: linear-gradient(135deg, var(--forest-green) 0%, var(--primary-green) 100%);
+  --color: rgb(150, 239, 186);
+  --border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(10, 54, 34, 0.3);
+}
+
+.toast-warning {
+  --background: linear-gradient(135deg, #fd7e14 0%, #e55100 100%);
+  --color: rgb(122, 236, 194);
+  --border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(253, 126, 20, 0.3);
+}
+
+.toast-danger {
+  --background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  --color: rgb(124, 235, 192);
+  --border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.3);
+}
+
+// Alert Styling - Darker
+.alert-button-cancel {
+  color: var(--darker-green) !important;
+  font-weight: 600 !important;
+}
+
+.alert-button-confirm {
+  color: #dc3545 !important;
+  font-weight: 700 !important;
+}
+
+// Custom Scrollbar for better UX
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--very-light-green);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary-green) 0%, var(--forest-green) 100%);
+  border-radius: 4px;
+  
+  &:hover {
+    background: linear-gradient(180deg, var(--forest-green) 0%, var(--darker-green) 100%);
+  }
+}
+
+// Loading Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.course-card {
+  animation: fadeInUp 0.6s ease-out;
+  
+  &:hover {
+    animation: pulse 0.6s ease-in-out;
+  }
+}
+
+.stats-card {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+// Focus States for Accessibility
+ion-button:focus-visible {
+  outline: 3px solid var(--forest-green);
+  outline-offset: 2px;
+}
+
+ion-item:focus-within {
+  --border-color: var(--forest-green) !important;
+  border-color: var(--forest-green) !important;
+  box-shadow: 0 0 0 3px rgba(0, 66, 37, 0.2) !important;
+}
+
+// Print Styles
+@media print {
+  .search-container,
+  .action-buttons,
+  ion-infinite-scroll,
+  ion-header {
+    display: none !important;
+  }
+  
+  .course-card {
+    break-inside: avoid;
+    box-shadow: none !important;
+    border: 2px solid var(--dark-green) !important;
+  }
+  
+  .courses-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}

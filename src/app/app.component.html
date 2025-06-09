@@ -1,0 +1,26 @@
+<ion-app>
+  <ion-menu contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Navigation</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item routerLink="/students" routerDirection="root">
+          Students
+        </ion-item>
+        <ion-item routerLink="/courses" routerDirection="root">
+          Courses
+        </ion-item>
+        <ion-item routerLink="/teachers" routerDirection="root">
+          Teachers
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <div class="ion-page" id="main-content">
+    <ion-router-outlet></ion-router-outlet>
+  </div>
+</ion-app>

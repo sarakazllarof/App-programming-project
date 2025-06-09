@@ -1,0 +1,287 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <div class="header-content">
+        <img src="assets/icon/polis-logo.png" alt="Polis Logo" class="logo-image" *ngIf="false">
+        <div class="logo-placeholder">🎓</div>
+        <span>Polis University</span>
+      </div>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="loadDashboardData()" fill="clear">
+        <ion-icon name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Pull to Refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh..."
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-background">
+      <div class="floating-element"></div>
+      <div class="floating-element"></div>
+      <div class="floating-element"></div>
+    </div>
+    
+    <div class="hero-content">
+      <div class="hero-badge">{{ getGreeting() }}!</div>
+      <div class="date-time">
+        <ion-icon name="calendar-outline"></ion-icon>
+        {{ getFormattedDate() }}
+        <span class="time-separator">|</span>
+        <ion-icon name="time-outline"></ion-icon>
+        {{ getFormattedTime() }}
+      </div>
+      <h1 class="hero-title">Welcome to Polis University</h1>
+      <div class="university-motto">"Education is the key to the future"</div>
+      <p class="hero-description">
+        Welcome to the Polis University Management System. 
+        Here you can manage courses, students, and faculty with complete ease.
+      </p>
+      <div class="hero-actions">
+        <ion-button fill="solid" class="primary-action">
+          <ion-icon name="school-outline" slot="start"></ion-icon>
+          Explore Programs
+        </ion-button>
+        <ion-button fill="outline" class="secondary-action">
+          <ion-icon name="calendar-outline" slot="start"></ion-icon>
+          View Schedule
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Stats Section -->
+  <div class="stats-section">
+    <div class="stat-card">
+      <ion-icon name="people-outline"></ion-icon>
+      <div class="stat-content">
+        <h3>5,000+</h3>
+        <p>Students</p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <ion-icon name="book-outline"></ion-icon>
+      <div class="stat-content">
+        <h3>50+</h3>
+        <p>Programs</p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <ion-icon name="business-outline"></ion-icon>
+      <div class="stat-content">
+        <h3>20+</h3>
+        <p>Years</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- University Info Section -->
+  <div class="university-info">
+    <h2 class="section-title">
+      <ion-icon name="school-outline"></ion-icon>
+      About Polis University
+    </h2>
+    
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="card-icon">
+          <ion-icon name="trophy-outline"></ion-icon>
+        </div>
+        <h3 class="card-title">Academic Excellence</h3>
+        <p class="card-description">
+          Polis University offers high academic programs with a focus on innovation and research.
+          Over 20 years of experience in higher education.
+        </p>
+        <ion-button fill="clear" class="card-action">
+          Learn More
+          <ion-icon name="arrow-forward" slot="end"></ion-icon>
+        </ion-button>
+      </div>
+      
+      <div class="info-card">
+        <div class="card-icon">
+          <ion-icon name="globe-outline"></ion-icon>
+        </div>
+        <h3 class="card-title">International Collaboration</h3>
+        <p class="card-description">
+          Partnerships with international universities and exchange programs for our students.
+          Preparation for global careers.
+        </p>
+        <ion-button fill="clear" class="card-action">
+          Learn More
+          <ion-icon name="arrow-forward" slot="end"></ion-icon>
+        </ion-button>
+      </div>
+      
+      <div class="info-card">
+        <div class="card-icon">
+          <ion-icon name="bulb-outline"></ion-icon>
+        </div>
+        <h3 class="card-title">Innovation & Technology</h3>
+        <p class="card-description">
+          Modern laboratories and advanced technology for a complete academic experience.
+          Preparation for tomorrow's industry.
+        </p>
+        <ion-button fill="clear" class="card-action">
+          Learn More
+          <ion-icon name="arrow-forward" slot="end"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Cards -->
+  <div class="navigation-section">
+    <h2 class="section-title">
+      <ion-icon name="grid-outline"></ion-icon>
+      Academic Management
+    </h2>
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-cards">
+      <ion-card *ngFor="let card of dashboardCards" class="nav-card skeleton">
+        <ion-card-content>
+          <div class="nav-icon skeleton-element">
+            <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+          </div>
+          <div class="nav-title skeleton-element">
+            <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+          </div>
+          <div class="nav-description skeleton-element">
+            <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Navigation Cards -->
+    <div *ngIf="!isLoading" class="nav-cards">
+      <ion-card 
+        *ngFor="let card of dashboardCards; trackBy: trackByCard"
+        class="nav-card"
+        [class]="'card-' + card.color"
+        (click)="navigateToPage(card.route)"
+        button>
+        
+        <ion-card-content>
+          <div class="nav-icon" [class]="'icon-' + card.color">
+            <ion-icon [name]="card.icon"></ion-icon>
+          </div>
+          
+          <h3 class="nav-title">{{ card.title }}</h3>
+          
+          <p class="nav-description">{{ card.description }}</p>
+          
+          <div class="nav-arrow">
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+  <!-- Map Section -->
+  <div class="map-section">
+    <h2 class="section-title">
+      <ion-icon name="location-outline"></ion-icon>
+      Our Location
+    </h2>
+    
+    <div class="map-container">
+      <div class="map-placeholder">
+        <div class="map-content">
+          <ion-icon name="business-outline" class="map-icon"></ion-icon>
+          <div class="map-text">
+            <div class="map-title">Polis University</div>
+            <div class="map-address">Bylis Street 12, Tirana, Albania</div>
+          </div>
+        </div>
+      </div>
+      <div class="location-info">
+        <p><strong>Address:</strong> Bylis Street 12, Tirana 1001, Albania</p>
+        <p><strong>Area:</strong> Tirana-Durres Highway, Km 5, Kashar, SH2, Tirana 1051</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>
+          <ion-icon name="call-outline"></ion-icon>
+          Contact
+        </h3>
+        <div class="contact-item">
+          <ion-icon name="call"></ion-icon>
+          <span>+355 4 2407 420</span>
+        </div>
+        <div class="contact-item">
+          <ion-icon name="mail"></ion-icon>
+          <span>info&#64;universitetipolis.edu.al</span>
+        </div>
+        <div class="contact-item">
+          <ion-icon name="globe"></ion-icon>
+          <span>www.universitetipolis.edu.al</span>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>
+          <ion-icon name="time-outline"></ion-icon>
+          Working Hours
+        </h3>
+        <div class="contact-item">
+          <ion-icon name="today"></ion-icon>
+          <span>Monday - Friday: 08:00 - 18:00</span>
+        </div>
+        <div class="contact-item">
+          <ion-icon name="calendar"></ion-icon>
+          <span>Saturday: 09:00 - 14:00</span>
+        </div>
+        <div class="contact-item">
+          <ion-icon name="close-circle"></ion-icon>
+          <span>Sunday: Closed</span>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>
+          <ion-icon name="logo-facebook"></ion-icon>
+          Social Media
+        </h3>
+        <div class="contact-item">
+          <ion-icon name="logo-facebook"></ion-icon>
+          <span>&#64;PolisUniversity</span>
+        </div>
+        <div class="contact-item">
+          <ion-icon name="logo-instagram"></ion-icon>
+          <span>&#64;polis_university</span>
+        </div>
+        <div class="contact-item">
+          <ion-icon name="logo-linkedin"></ion-icon>
+          <span>Polis University</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="system-info">
+        <ion-icon name="server-outline"></ion-icon>
+        <span>© 2025 Polis University - Management System v2.0</span>
+      </div>
+    </div>
+  </div>
+</ion-content>

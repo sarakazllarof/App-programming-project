@@ -1,0 +1,396 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goHome()" fill="clear">
+        <ion-icon name="home-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Studentët</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openAddForm()" fill="clear">
+        <ion-icon name="add" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Search Component -->
+  <div class="search-container">
+    <app-search 
+      placeholder="Kërko studentë..." 
+      [value]="searchTerm"
+      (searchChange)="onSearchChange($event)">
+    </app-search>
+  </div>
+
+  <!-- Statistics Summary -->
+  <div class="stats-container" *ngIf="!isLoading">
+    <ion-card class="stats-card">
+      <ion-card-content>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <ion-icon name="people-outline" class="stat-icon"></ion-icon>
+            <div class="stat-info">
+              <h3>{{ totalElements }}</h3>
+              <p>Totali Studentëve</p>
+            </div>
+          </div>
+          <div class="stat-item">
+            <ion-icon name="school-outline" class="stat-icon"></ion-icon>
+            <div class="stat-info">
+              <h3>{{ getStudentsWithCourses() }}</h3>
+              <p>Me Kurs</p>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading && students.length === 0" class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Duke ngarkuar studentët...</p>
+  </div>
+
+  <!-- Students Grid -->
+  <div class="students-grid" *ngIf="!isLoading || students.length > 0">
+    <ion-card *ngFor="let student of students; trackBy: trackByStudent" class="student-card">
+      <ion-card-header>
+        <div class="student-header">
+          <ion-card-title>{{ student.firstName }} {{ student.lastName }}</ion-card-title>
+          <ion-badge color="primary" *ngIf="student.course && student.course.id">
+            <ion-icon name="school-outline"></ion-icon>
+          </ion-badge>
+        </div>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <div class="student-details">
+          <div class="course-info" *ngIf="student.course && student.course.id">
+            <ion-icon name="school-outline"></ion-icon>
+            <span>{{ getCourseName(student.course) }}</span>
+          </div>
+          <div class="course-info no-course" *ngIf="!student.course || !student.course.id">
+            <ion-icon name="school-add-outline"></ion-icon>
+            <span>Pa kurs</span>
+          </div>
+          <div class="serial-info">
+            <ion-icon name="card-outline"></ion-icon>
+            <span>{{ student.serialNumber }}</span>
+          </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <ion-button 
+            fill="outline" 
+            size="small" 
+            (click)="viewStudentDetails(student)">
+            <ion-icon name="eye-outline" slot="start"></ion-icon>
+            Shiko
+          </ion-button>
+          
+          <ion-button 
+            fill="outline" 
+            size="small" 
+            color="warning"
+            (click)="openEditForm(student)">
+            <ion-icon name="create-outline" slot="start"></ion-icon>
+            Edito
+          </ion-button>
+          
+          <ion-button 
+            fill="outline" 
+            size="small" 
+            color="medium"
+            *ngIf="student.course && student.course.id"
+            (click)="removeStudentFromCourse(student)">
+            <ion-icon name="school-remove-outline" slot="start"></ion-icon>
+            Hiq nga Kursi
+          </ion-button>
+          
+          <ion-button 
+            fill="outline" 
+            size="small" 
+            color="success"
+            *ngIf="!student.course || !student.course.id"
+            (click)="associateToCourse(student)">
+            <ion-icon name="school-add-outline" slot="start"></ion-icon>
+            Shto në Kurs
+          </ion-button>
+          
+          <ion-button 
+            fill="outline" 
+            size="small" 
+            color="danger"
+            (click)="deleteStudent(student)">
+            <ion-icon name="trash-outline" slot="start"></ion-icon>
+            Fshi
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!isLoading && students.length === 0" class="empty-state">
+    <ion-icon name="people-outline" size="large"></ion-icon>
+    <h3>Nuk ka studentë</h3>
+    <p>{{ searchTerm ? 'Nuk u gjetën studentë për kërkimin tuaj' : 'Shtoni studentin e parë' }}</p>
+    <ion-button (click)="openAddForm()" *ngIf="!searchTerm">
+      <ion-icon name="add" slot="start"></ion-icon>
+      Shto Student
+    </ion-button>
+  </div>
+
+  <!-- Infinite Scroll -->
+  <ion-infinite-scroll (ionInfinite)="loadMoreData($event)" [disabled]="currentPage >= totalPages - 1">
+    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Duke ngarkuar më shumë...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <!-- Student Details Modal -->
+  <ion-modal [isOpen]="showDetailsModal" (didDismiss)="closeDetailsModal()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Detajet e Studentit</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeDetailsModal()">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      
+      <ion-content *ngIf="selectedStudent">
+        <div class="student-details-content">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{ selectedStudent.firstName }} {{ selectedStudent.lastName }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list>
+                <ion-item>
+                  <ion-icon name="person-outline" slot="start"></ion-icon>
+                  <ion-label>
+                    <h3>Emri</h3>
+                    <p>{{ selectedStudent.firstName }}</p>
+                  </ion-label>
+                </ion-item>
+                
+                <ion-item>
+                  <ion-icon name="person-outline" slot="start"></ion-icon>
+                  <ion-label>
+                    <h3>Mbiemri</h3>
+                    <p>{{ selectedStudent.lastName }}</p>
+                  </ion-label>
+                </ion-item>
+                
+                <ion-item>
+                  <ion-icon name="card-outline" slot="start"></ion-icon>
+                  <ion-label>
+                    <h3>Numri Serial</h3>
+                    <p>{{ selectedStudent.serialNumber }}</p>
+                  </ion-label>
+                </ion-item>
+                
+                <ion-item>
+                  <ion-icon name="school-outline" slot="start"></ion-icon>
+                  <ion-label>
+                    <h3>Kursi</h3>
+                    <p>{{ getCourseName(selectedStudent.course) }}</p>
+                  </ion-label>
+                </ion-item>
+                
+                <ion-item>
+                  <ion-icon name="key-outline" slot="start"></ion-icon>
+                  <ion-label>
+                    <h3>ID</h3>
+                    <p>{{ selectedStudent.id }}</p>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+              
+              <div class="detail-actions">
+                <ion-button expand="block" (click)="editSelectedStudent()">
+                  <ion-icon name="create-outline" slot="start"></ion-icon>
+                  Edito Studentin
+                </ion-button>
+                
+                <ion-button 
+                  expand="block" 
+                  color="medium"
+                  *ngIf="selectedStudent.course && selectedStudent.course.id"
+                  (click)="removeStudentFromSelectedCourse()">
+                  <ion-icon name="school-remove-outline" slot="start"></ion-icon>
+                  Hiq nga Kursi
+                </ion-button>
+                
+                <ion-button 
+                  expand="block" 
+                  color="success"
+                  *ngIf="!selectedStudent.course || !selectedStudent.course.id"
+                  (click)="associateStudentToSelectedCourse()">
+                  <ion-icon name="school-add-outline" slot="start"></ion-icon>
+                  Shto në Kurs
+                </ion-button>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!-- Add/Edit Form Modal -->
+  <ion-modal [isOpen]="showForm" (didDismiss)="cancelForm()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ editingStudent ? 'Përditëso Studentin' : 'Shto Student të Ri' }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancelForm()">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      
+      <ion-content>
+        <form (ngSubmit)="saveStudent()" #studentForm="ngForm">
+          <ion-item>
+            <ion-label position="stacked">Emri *</ion-label>
+            <ion-input 
+              [(ngModel)]="studentFirstName" 
+              name="studentFirstName"
+              required
+              placeholder="Shkruani emrin e studentit"
+              [class.ion-invalid]="studentForm.submitted && !studentFirstName.trim()">
+            </ion-input>
+            <ion-note slot="error" *ngIf="studentForm.submitted && !studentFirstName.trim()">
+              Emri është i detyrueshëm
+            </ion-note>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Mbiemri *</ion-label>
+            <ion-input 
+              [(ngModel)]="studentLastName" 
+              name="studentLastName"
+              required
+              placeholder="Shkruani mbiemrin e studentit"
+              [class.ion-invalid]="studentForm.submitted && !studentLastName.trim()">
+            </ion-input>
+            <ion-note slot="error" *ngIf="studentForm.submitted && !studentLastName.trim()">
+              Mbiemri është i detyrueshëm
+            </ion-note>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Numri Serial *</ion-label>
+            <ion-input 
+              [(ngModel)]="studentSerialNumber" 
+              name="studentSerialNumber"
+              required
+              placeholder="Shkruani numrin serial të studentit"
+              [class.ion-invalid]="studentForm.submitted && !studentSerialNumber.trim()">
+            </ion-input>
+            <ion-note slot="error" *ngIf="studentForm.submitted && !studentSerialNumber.trim()">
+              Numri serial është i detyrueshëm
+            </ion-note>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Kursi</ion-label>
+            <ion-select 
+              [(ngModel)]="selectedCourseId" 
+              name="courseId"
+              placeholder="Zgjidhni kursin">
+              <ion-select-option [value]="null">Pa kurs</ion-select-option>
+              <ion-select-option 
+                *ngFor="let course of courses" 
+                [value]="course.id">
+                {{ course.title }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <div class="form-buttons">
+            <ion-button 
+              type="submit" 
+              expand="block" 
+              [disabled]="!studentForm.valid">
+              <ion-icon name="save-outline" slot="start"></ion-icon>
+              {{ editingStudent ? 'Përditëso' : 'Shto' }}
+            </ion-button>
+            <ion-button 
+              type="button" 
+              expand="block" 
+              fill="outline" 
+              (click)="cancelForm()">
+              <ion-icon name="close-outline" slot="start"></ion-icon>
+              Anulo
+            </ion-button>
+          </div>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!-- Associate to Course Modal -->
+  <ion-modal [isOpen]="showCourseModal" (didDismiss)="closeCourseModal()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Asocio me Kurs</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeCourseModal()">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      
+      <ion-content>
+        <div class="course-selection" *ngIf="studentForCourse">
+          <ion-item>
+            <ion-label>
+              <h2>Student: {{ studentForCourse.firstName }} {{ studentForCourse.lastName }}</h2>
+              <p>Zgjidhni kursin për këtë student</p>
+            </ion-label>
+          </ion-item>
+          
+          <ion-radio-group [(ngModel)]="selectedCourseForAssociation">
+            <ion-item *ngFor="let course of courses">
+              <ion-label>
+                <h3>{{ course.title }}</h3>
+                <p>{{ course.code }} - {{ course.year }}</p>
+              </ion-label>
+              <ion-radio slot="end" [value]="course.id"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+          
+          <div class="course-modal-buttons">
+            <ion-button 
+              expand="block" 
+              [disabled]="!selectedCourseForAssociation"
+              (click)="confirmCourseAssociation()">
+              <ion-icon name="school-add-outline" slot="start"></ion-icon>
+              Asocio me Kurs
+            </ion-button>
+            <ion-button 
+              expand="block" 
+              fill="outline" 
+              (click)="closeCourseModal()">
+              <ion-icon name="close-outline" slot="start"></ion-icon>
+              Anulo
+            </ion-button>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

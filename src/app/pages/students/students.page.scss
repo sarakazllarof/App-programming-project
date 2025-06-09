@@ -1,0 +1,860 @@
+// Dark Blue Theme Variables for Students
+:root {
+  --primary-blue: #155a72;
+  --secondary-blue: #197387;
+  --dark-blue: #0a2236;
+  --light-blue: #6f9cc7;
+  --accent-blue: #146c87;
+  --ocean-blue: #004266;
+  --mint-blue: #7fb0d3;
+  --bright-blue: #1975a8;
+  --very-light-blue: #d1e7f0;
+  --pastel-blue: #a3cfdd;
+  --darker-blue: #052e40;
+}
+
+// Page Background - Darker
+ion-content {
+  --background: linear-gradient(135deg, var(--pastel-blue) 0%, var(--light-blue) 100%);
+}
+
+// Header Styling - Much Darker
+ion-header {
+  ion-toolbar {
+    --background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--darker-blue) 100%);
+    --color: rgb(85, 150, 180);
+    box-shadow: 0 4px 15px rgba(15, 34, 54, 0.6);
+    border-bottom: 3px solid var(--darker-blue);
+    
+    ion-title {
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+      color: rgb(64, 130, 180) !important;
+    }
+    
+    ion-button {
+      --color: rgb(86, 138, 200);
+      
+      &:hover {
+        --background: rgba(255, 255, 255, 0.15);
+      }
+    }
+  }
+}
+
+// Search Container - Darker
+.search-container {
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--dark-blue) 0%, var(--ocean-blue) 100%);
+  border-bottom: 3px solid var(--darker-blue);
+  box-shadow: 0 4px 12px rgba(10, 34, 54, 0.4);
+}
+
+// Statistics Container - Darker
+.stats-container {
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+  
+  .stats-card {
+    margin: 0;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(10, 34, 54, 0.3);
+    border: 3px solid var(--primary-blue);
+    background: linear-gradient(135deg, var(--very-light-blue) 0%, var(--pastel-blue) 100%);
+    
+    ion-card-content {
+      padding: 1rem;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      
+      .stat-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 1rem;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--primary-blue) 100%);
+        border: 2px solid var(--dark-blue);
+        color: rgb(124, 189, 220);
+        
+        .stat-icon {
+          font-size: 2rem;
+          color: rgb(40, 88, 140);
+          background: rgba(255, 255, 255, 0.2);
+          padding: 12px;
+          border-radius: 50%;
+          border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .stat-info {
+          h3 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: rgb(33, 86, 140);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+          }
+          
+          p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: rgba(140, 222, 255, 0.9);
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Students Grid - Darker Theme
+.students-grid {
+  padding: 0 1rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  
+  .student-card {
+    margin: 0;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(10, 34, 54, 0.25);
+    border: 3px solid var(--primary-blue);
+    background: linear-gradient(135deg, rgba(131, 193, 230, 0.729) 0%, var(--very-light-blue) 100%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, var(--ocean-blue), var(--primary-blue));
+    }
+    
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(10, 34, 54, 0.35);
+      border-color: var(--ocean-blue);
+      
+      &::before {
+        background: linear-gradient(90deg, var(--darker-blue), var(--ocean-blue));
+      }
+    }
+    
+    ion-card-header {
+      padding: 1rem 1rem 0.5rem;
+      background: linear-gradient(135deg, var(--very-light-blue) 0%, var(--pastel-blue) 100%);
+      border-bottom: 1px solid var(--light-blue);
+      
+      .student-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        
+        ion-card-title {
+          color: var(--darker-blue);
+          font-size: 1.4rem;
+          font-weight: 700;
+          margin: 0;
+          flex: 1;
+          text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+        }
+        
+        ion-badge {
+          margin-left: 8px;
+          --background: var(--ocean-blue);
+          --color: rgb(186, 218, 245);
+          border-radius: 12px;
+          padding: 6px 10px;
+          border: 2px solid var(--primary-blue);
+          
+          ion-icon {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+    
+    ion-card-content {
+      padding: 1rem;
+      
+      .student-details {
+        margin-bottom: 1.5rem;
+        
+        .course-info, .serial-info {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 0.8rem;
+          border-radius: 12px;
+          background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--primary-blue) 100%);
+          color: rgb(148, 212, 254);
+          font-weight: 600;
+          border: 2px solid var(--dark-blue);
+          box-shadow: 0 4px 12px rgba(10, 34, 54, 0.2);
+          margin-bottom: 0.5rem;
+          
+          &.no-course {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            color: rgb(146, 210, 245);
+            border-color: #495057;
+          }
+          
+          ion-icon {
+            font-size: 1.2rem;
+          }
+          
+          span {
+            font-size: 0.95rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+          }
+        }
+        
+        .serial-info {
+          background: linear-gradient(135deg, var(--accent-blue) 0%, var(--secondary-blue) 100%);
+          color: rgb(180, 230, 255);
+        }
+      }
+      
+      .action-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+        
+        ion-button {
+          --border-radius: 10px;
+          --border-width: 2px;
+          font-size: 0.85rem;
+          height: 36px;
+          font-weight: 600;
+          
+          ion-icon {
+            font-size: 1.1rem;
+          }
+          
+          &:not([color]) {
+            --color: var(--dark-blue);
+            --border-color: var(--dark-blue);
+            
+            &:hover {
+              --background: rgba(10, 34, 54, 0.1);
+            }
+          }
+          
+          &[color="warning"] {
+            --color: #fd7e14;
+            --border-color: #fd7e14;
+            
+            &:hover {
+              --background: rgba(253, 126, 20, 0.1);
+            }
+          }
+          
+          &[color="success"] {
+            --color: var(--ocean-blue);
+            --border-color: var(--ocean-blue);
+            
+            &:hover {
+              --background: rgba(0, 66, 102, 0.1);
+            }
+          }
+          
+          &[color="danger"] {
+            --color: #dc3545;
+            --border-color: #dc3545;
+            
+            &:hover {
+              --background: rgba(220, 53, 69, 0.1);
+            }
+          }
+          
+          &[color="medium"] {
+            --color: #495057;
+            --border-color: #495057;
+            
+            &:hover {
+              --background: rgba(73, 80, 87, 0.1);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Loading Container - Darker
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  color: var(--darker-blue);
+  
+  ion-spinner {
+    --color: var(--ocean-blue);
+    margin-bottom: 1.5rem;
+    transform: scale(1.5);
+  }
+  
+  p {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+  }
+}
+
+// Empty State - Darker
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  color: var(--darker-blue);
+  background: linear-gradient(135deg, var(--very-light-blue) 0%, var(--pastel-blue) 100%);
+  border-radius: 20px;
+  margin: 1rem;
+  border: 3px solid var(--primary-blue);
+  box-shadow: 0 8px 25px rgba(10, 34, 54, 0.15);
+  
+  ion-icon {
+    color: var(--ocean-blue);
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+    filter: drop-shadow(0 4px 8px rgba(10, 34, 54, 0.2));
+  }
+  
+  h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--darker-blue);
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+  }
+  
+  p {
+    margin: 0 0 2rem 0;
+    color: var(--dark-blue);
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  
+  ion-button {
+    --background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--primary-blue) 100%);
+    --color: rgb(134, 200, 238);
+    --border-radius: 12px;
+    font-weight: 700;
+    height: 50px;
+    padding: 0 2rem;
+    box-shadow: 0 6px 20px rgba(10, 34, 54, 0.3);
+    
+    &:hover {
+      box-shadow: 0 8px 25px rgba(10, 34, 54, 0.4);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// Modal Styles - Darker
+ion-modal {
+  --background: var(--very-light-blue);
+  
+  ion-header {
+    ion-toolbar {
+      --background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--darker-blue) 100%);
+      --color: rgb(166, 216, 243);
+      box-shadow: 0 4px 12px rgba(10, 34, 54, 0.4);
+      
+      ion-title {
+        font-weight: 700;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+      
+      ion-button {
+        --color: rgb(152, 188, 245);
+        
+        &:hover {
+          --background: rgba(255, 255, 255, 0.15);
+        }
+      }
+    }
+  }
+  
+  ion-content {
+    --background: var(--very-light-blue);
+    padding: 1rem;
+  }
+}
+
+// Student Details Content - Darker
+.student-details-content {
+  ion-card {
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(10, 34, 54, 0.25);
+    border: 3px solid var(--primary-blue);
+    background: rgb(186, 214, 247);
+    
+    ion-card-header {
+      background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--primary-blue) 100%);
+      border-bottom: 2px solid var(--dark-blue);
+      color: rgb(183, 212, 244);
+      
+      ion-card-title {
+        color: rgb(179, 191, 243);
+        font-weight: 700;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+    }
+    
+    ion-list {
+      background: transparent;
+      
+      ion-item {
+        --background: var(--very-light-blue);
+        --border-color: var(--light-blue);
+        margin-bottom: 0.5rem;
+        border-radius: 12px;
+        border: 2px solid var(--light-blue);
+        
+        ion-icon {
+          color: var(--ocean-blue);
+          margin-right: 12px;
+          font-size: 1.5rem;
+        }
+        
+        ion-label {
+          h3 {
+            color: var(--darker-blue);
+            font-weight: 700;
+            margin-bottom: 6px;
+            font-size: 1.1rem;
+          }
+          
+          p {
+            color: var(--dark-blue);
+            font-weight: 600;
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+    
+    .detail-actions {
+      padding: 1.5rem;
+      background: var(--very-light-blue);
+      
+      ion-button {
+        --border-radius: 12px;
+        margin-bottom: 0.8rem;
+        font-weight: 600;
+        height: 48px;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+        
+        &:not([color]) {
+          --background: var(--ocean-blue);
+          --color: rgb(147, 188, 246);
+        }
+      }
+    }
+  }
+}
+
+// Form Styles - Darker
+form {
+  padding: 1.5rem;
+  
+  ion-item {
+    --background: rgb(34, 130, 178);
+    --border-color: var(--primary-blue);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    border: 2px solid var(--primary-blue);
+    box-shadow: 0 4px 12px rgba(10, 34, 54, 0.1);
+    
+    ion-label {
+      color: var(--darker-blue);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    
+    ion-input, ion-select {
+      --color: var(--darker-blue);
+      font-weight: 600;
+    }
+    
+    &.ion-invalid {
+      --border-color: #dc3545;
+      border-color: #dc3545;
+      box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+    }
+    
+    &:focus-within {
+      --border-color: var(--ocean-blue);
+      border-color: var(--ocean-blue);
+      box-shadow: 0 0 0 3px rgba(0, 66, 102, 0.15);
+    }
+  }
+  
+  .form-buttons {
+    padding: 1.5rem 0;
+    
+    ion-button {
+      --border-radius: 12px;
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+      height: 50px;
+      
+      &[type="submit"] {
+        --background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--primary-blue) 100%);
+        --color: rgb(142, 205, 250);
+        box-shadow: 0 6px 20px rgba(10, 34, 54, 0.3);
+        
+        &:hover {
+          box-shadow: 0 8px 25px rgba(10, 34, 54, 0.4);
+        }
+      }
+      
+      &[fill="outline"] {
+        --color: var(--darker-blue);
+        --border-color: var(--darker-blue);
+        --border-width: 2px;
+        
+        &:hover {
+          --background: rgba(5, 22, 46, 0.1);
+        }
+      }
+    }
+  }
+}
+
+// Course Selection - Darker
+.course-selection {
+  padding: 1.5rem;
+  
+  ion-item:first-child {
+    --background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--primary-blue) 100%);
+    color: rgb(131, 204, 238);
+    border: 2px solid var(--dark-blue);
+    margin-bottom: 1.5rem;
+    
+    ion-label {
+      h2 {
+        color: rgb(176, 203, 251);
+        font-weight: 700;
+        margin-bottom: 8px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+      
+      p {
+        color: rgba(198, 220, 248, 0.9);
+        font-weight: 500;
+      }
+    }
+  }
+  
+  ion-radio-group {
+    ion-item {
+      --background: rgb(167, 195, 239);
+      --border-color: var(--primary-blue);
+      border-radius: 12px;
+      margin-bottom: 0.8rem;
+      border: 2px solid var(--primary-blue);
+      box-shadow: 0 4px 12px rgba(10, 34, 54, 0.1);
+      transition: all 0.3s ease;
+      
+      &.item-radio-checked {
+        --background: linear-gradient(135deg, var(--very-light-blue) 0%, var(--pastel-blue) 100%);
+        --border-color: var(--ocean-blue);
+        border-color: var(--ocean-blue);
+        box-shadow: 0 6px 20px rgba(10, 34, 54, 0.2);
+        transform: translateY(-2px);
+      }
+      
+      &:hover {
+        box-shadow: 0 6px 18px rgba(10, 34, 54, 0.15);
+      }
+      
+      ion-label {
+        h3 {
+          color: var(--darker-blue);
+          font-weight: 700;
+          margin-bottom: 6px;
+          font-size: 1.1rem;
+        }
+        
+        p {
+          color: var(--dark-blue);
+          font-size: 0.95rem;
+          font-weight: 500;
+        }
+      }
+      
+      ion-radio {
+        --color: var(--ocean-blue);
+        --color-checked: var(--ocean-blue);
+        margin-right: 8px;
+      }
+    }
+  }
+  
+  .course-modal-buttons {
+    padding: 1.5rem 0;
+    
+    ion-button {
+      --border-radius: 12px;
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+      height: 50px;
+      
+      &:not([fill="outline"]) {
+        --background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--primary-blue) 100%);
+        --color: rgb(176, 218, 244);
+        box-shadow: 0 6px 20px rgba(10, 34, 54, 0.3);
+        
+        &:hover {
+          box-shadow: 0 8px 25px rgba(10, 34, 54, 0.4);
+        }
+      }
+      
+      &[fill="outline"] {
+        --color: var(--darker-blue);
+        --border-color: var(--darker-blue);
+        --border-width: 2px;
+        
+        &:hover {
+          --background: rgba(5, 22, 46, 0.1);
+        }
+      }
+    }
+  }
+}
+
+// Responsive Design - Enhanced
+@media (max-width: 768px) {
+  .students-grid {
+    grid-template-columns: 1fr;
+    padding: 0 0.5rem 2rem;
+  }
+  
+  .stats-container {
+    padding: 0 0.5rem;
+    
+    .stats-grid {
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+      
+      .stat-item {
+        padding: 0.8rem;
+        
+        .stat-icon {
+          font-size: 1.5rem;
+          padding: 8px;
+        }
+        
+        .stat-info {
+          h3 {
+            font-size: 1.4rem;
+          }
+          
+          p {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+  
+  .student-card {
+    ion-card-header {
+      padding: 0.8rem 0.8rem 0.3rem;
+      
+      .student-header {
+        ion-card-title {
+          font-size: 1.2rem;
+        }
+      }
+    }
+    
+    ion-card-content {
+      padding: 0.8rem;
+      
+      .action-buttons {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        
+        ion-button {
+          height: 40px;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+  
+  .search-container {
+    padding: 0.8rem;
+  }
+  
+  .empty-state {
+    padding: 2rem 1rem;
+    margin: 0.5rem;
+    
+    h3 {
+      font-size: 1.5rem;
+    }
+    
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .students-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  
+  .stats-container .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// Infinite Scroll - Darker
+ion-infinite-scroll-content {
+  --color: var(--ocean-blue);
+  
+  .infinite-loading {
+    color: var(--darker-blue);
+    font-weight: 600;
+  }
+}
+
+// Toast Styling (Global) - Enhanced
+.toast-success {
+  --background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--primary-blue) 100%);
+  --color: rgb(150, 186, 239);
+  --border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(10, 34, 54, 0.3);
+}
+
+.toast-warning {
+  --background: linear-gradient(135deg, #fd7e14 0%, #e55100 100%);
+  --color: rgb(122, 194, 236);
+  --border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(253, 126, 20, 0.3);
+}
+
+.toast-danger {
+  --background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  --color: rgb(124, 192, 235);
+  --border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.3);
+}
+
+// Alert Styling - Darker
+.alert-button-cancel {
+  color: var(--darker-blue) !important;
+  font-weight: 600 !important;
+}
+
+.alert-button-confirm {
+  color: #dc3545 !important;
+  font-weight: 700 !important;
+}
+
+// Custom Scrollbar for better UX
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--very-light-blue);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary-blue) 0%, var(--ocean-blue) 100%);
+  border-radius: 4px;
+  
+  &:hover {
+    background: linear-gradient(180deg, var(--ocean-blue) 0%, var(--darker-blue) 100%);
+  }
+}
+
+// Loading Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.student-card {
+  animation: fadeInUp 0.6s ease-out;
+  
+  &:hover {
+    animation: pulse 0.6s ease-in-out;
+  }
+}
+
+.stats-card {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+// Focus States for Accessibility
+ion-button:focus-visible {
+  outline: 3px solid var(--ocean-blue);
+  outline-offset: 2px;
+}
+
+ion-item:focus-within {
+  --border-color: var(--ocean-blue) !important;
+  border-color: var(--ocean-blue) !important;
+  box-shadow: 0 0 0 3px rgba(0, 66, 102, 0.2) !important;
+}
+
+// Print Styles
+@media print {
+  .search-container,
+  .action-buttons,
+  ion-infinite-scroll,
+  ion-header {
+    display: none !important;
+  }
+  
+  .student-card {
+    break-inside: avoid;
+    box-shadow: none !important;
+    border: 2px solid var(--dark-blue) !important;
+  }
+  
+  .students-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
