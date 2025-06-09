@@ -35,3 +35,19 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+body, h1, h2, h3, h4, h5, h6, p, span, div, label, a, li, .stat-value, .stat-label, .card-title, .card-description, .nav-title, .nav-description, .footer, .footer * {
+  color: #000 !important;
+}
+
+body {
+  background: #B3E0FF !important;
+  padding: 1rem;
+  min-height: 100vh;
+  font-family: 'Poppins', 'Inter', Arial, sans-serif;
+}
+
+section, .page-background, ion-content {
+  background: transparent !important;
+  min-height: 100vh;
+}
